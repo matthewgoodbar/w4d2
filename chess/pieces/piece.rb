@@ -11,4 +11,8 @@ class Piece
     def valid_moves
         possible_moves = []
     end
+
+    def to_s
+        return "no"
+    end
 end

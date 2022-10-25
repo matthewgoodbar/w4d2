@@ -5,4 +5,8 @@ class Pawn < Piece
     def initialize(board, position, color)
         super
     end
+
+    def to_s
+        return "Pn"
+    end
 end

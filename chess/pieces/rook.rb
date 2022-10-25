@@ -7,6 +7,10 @@ class Rook < Piece
         super
     end
 
+    def to_s
+        return "Rk"
+    end
+
     private
     def diag?
         false
@@ -15,4 +19,5 @@ class Rook < Piece
     def horiz?
         true
     end
+
 end

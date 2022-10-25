@@ -7,6 +7,10 @@ class Bishop < Piece
         super
     end
 
+    def to_s
+        return "Bi"
+    end
+
     private
     def diag?
         true

@@ -6,4 +6,8 @@ class Knight < Piece
     def initialize(board, position, color)
         super
     end
+
+    def to_s
+        return "Kn"
+    end
 end

@@ -9,9 +9,7 @@ class NullPiece < Piece
         @color = nil
     end
 
-    def moves
-        
+    def to_s
+        return "  "
     end
-
-
 end

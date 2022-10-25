@@ -6,7 +6,10 @@ class Queen < Piece
     def initialize(board, position, color)
         super
     end
-
+    
+    def to_s
+        return "Qn"
+    end
     private
     def diag?
         true
@@ -15,4 +18,6 @@ class Queen < Piece
     def horiz?
         true
     end
+
+
 end
