@@ -1,4 +1,4 @@
-module Slidable
+module Slideable
     DIAGONAL_DIRS = {se:[1,1],sw:[1,-1],ne:[-1,1],nw:[-1,-1]}
     HORIZONTAL_DIRS = {s: [1,0],e: [0,1],n: [-1,0],w: [0,-1]}
 
@@ -13,7 +13,7 @@ module Slidable
         DIAGONAL_DIRS.each do |dir, dif|
             current_pos = self.position
             new_pos = current_pos + dif
-            until self.board[new_pos] != nil
+            while self.board.empty_position(new_pos)
                 possible_moves << new_pos
                 new_pos = new_pos + dif
             end

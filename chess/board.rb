@@ -6,10 +6,6 @@ class Board
         pos.all? {|num| num < 8 && num >= 0}
     end
 
-    def self.empty_position(pos)
-        return Board.valid_position?(pos) && self[pos] == NullPiece.instance
-    end
-
     def initialize
         @board = Array.new(8) {Array.new}
         populate
@@ -18,11 +14,15 @@ class Board
     def populate
         (0...@board.length).each do |row|
             if [0,1,6,7].include?(row)
-                8.times {@board[row].push Piece.new}
+                (0...8).each { |col| @board[row].push Piece.new(self, [row,col], :b)}
             else
-                8.times {@board[row].push NullPiece.instance}
+                (0...8).each {|col| @board[row].push NullPiece.instance}
             end
         end
+    end
+
+    def empty_position(pos)
+        return Board.valid_position?(pos) && self[pos] == NullPiece.instance
     end
 
     def [](pos)
