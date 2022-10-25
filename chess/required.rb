@@ -1,4 +1,4 @@
 require_relative "board"
-require_relative "piece"
-require_relative "slideable"
-require_relative "stepable"
+require_relative "pieces/piece"
+require_relative "pieces/slideable"
+require_relative "pieces/stepable"

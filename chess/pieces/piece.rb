@@ -1,9 +1,14 @@
-class Piece
-    def initialize
+require_relative "slideable"
+require_relative "stepable"
 
+class Piece
+    def initialize(board, position, color)
+        @board = board
+        @position = position
+        @color = color
     end
 
-    def moves
-        
+    def valid_moves
+        possible_moves = []
     end
 end

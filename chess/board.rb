@@ -6,6 +6,10 @@ class Board
         pos.all? {|num| num < 8 && num >= 0}
     end
 
+    def self.empty_position(pos)
+        return Board.valid_position?(pos) && self[pos] == NullPiece.instance
+    end
+
     def initialize
         @board = Array.new(8) {Array.new}
         populate
@@ -16,7 +20,7 @@ class Board
             if [0,1,6,7].include?(row)
                 8.times {@board[row].push Piece.new}
             else
-                8.times {@board[row].push nil}
+                8.times {@board[row].push NullPiece.instance}
             end
         end
     end
