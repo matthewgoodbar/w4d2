@@ -95,13 +95,13 @@ class Cursor
     when :return
       return self.cursor_pos
     when :ctrl_c
-      return 0
+      Process.exit(0)
     else
     end
   end
 
   def update_pos(diff)
     new_pos = [self.cursor_pos[0] + diff[0], self.cursor_pos[1] + diff[1]]
-    self.cursor_pos = new_pos unless Board.valid_position?(new_pos)
+    self.cursor_pos = new_pos if Board.valid_position?(new_pos)
   end
 end

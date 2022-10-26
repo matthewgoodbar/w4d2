@@ -84,9 +84,12 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
-        raise 'No piece there' if self[start_pos].nil?
-        raise 'Can\'t move there' unless Board.valid_position?(end_pos)
-
+        raise 'No piece there' if self.empty_position?(start_pos)
+        piece = self[start_pos]
+        moves = piece.moves
+        raise 'Can\'t move there' unless Board.valid_position?(end_pos) && moves.include?(end_pos)
+        self[start_pos] = Nullpiece.instance
+        self[end_pos] = piece
     end
 
 end

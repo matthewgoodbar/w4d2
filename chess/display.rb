@@ -16,7 +16,7 @@ class Display
             print "#{row} "
             (0...8).each do |col|
                 if [row,col] == @cursor.cursor_pos
-                    print "#{self.board[[row,col]].to_s}".colorize(:background => :yellow)
+                    print "#{self.board[[row,col]].to_s}".colorize(:background => :red)
                 else
                     print "#{self.board[[row,col]].to_s}"
                 end
@@ -27,12 +27,16 @@ class Display
     end
 
     def test_play
-        user_input = nil
-        until user_input == 0
+        res = []
+        while true
             system("clear") || system("cls")
             render
-            puts self.cursor.cursor_pos
             user_input = self.cursor.get_input
+            res << user_input unless user_input.nil?
+            if res.length == 2
+                self.board.move_piece(res[0], res[1])
+                res = []
+            end
         end
     end
 
