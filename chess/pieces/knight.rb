@@ -11,4 +11,9 @@ class Knight < Piece
     def to_s
         return "Kn"
     end
+
+    private
+    def move_difs
+        [[2,1],[2,-1],[-2,1],[-2,-1],[1,2],[-1,2],[1,-2],[-1,-2]]
+    end
 end
