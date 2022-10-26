@@ -1,26 +1,24 @@
 require_relative "required"
 
 class Board
+
+    attr_accessor :board
     
     def self.valid_position?(pos)
         pos.all? {|num| num < 8 && num >= 0}
     end
 
-    def initialize
-        @board = Array.new(8) {Array.new}
-        populate
+    def self.get_empty_board
+        instance = Board.new(true)
+        return instance
+    end
+
+    def initialize(empty=false)
+        @board = Array.new(8) {Array.new(8) {NullPiece.instance}}
+        populate unless empty
     end
 
     def populate
-        (0..7).each do |row|
-            (0..7).each do |col|
-                if row >= 2 && row <= 5
-                    self[[row,col]] = NullPiece.instance
-                else
-                    self[[row,col]] = nil
-                end
-            end
-        end
         populate_pawns
         populate_kings
         populate_queens
@@ -102,6 +100,10 @@ class Board
         end
         nil
     end
-
-    attr_accessor :board
 end
+
+# debugger
+# b = Board.get_empty_board
+# bish = Bishop.new(b, [5,5], :b)
+# b[[5,5]] = bish
+# p bish.moves
