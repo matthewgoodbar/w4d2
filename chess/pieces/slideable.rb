@@ -4,25 +4,25 @@ module Slideable
 
     def moves
         possible_moves = []
-        possible_moves += diagonal_moves if self.diag?
-        possible_moves += horizontal_moves if self.horiz?
+        possible_moves += get_moves(DIAGONAL_DIRS) if self.diag?
+        possible_moves += get_moves(HORIZONTAL_DIRS) if self.horiz?
         return possible_moves
     end
 
-    def diagonal_moves
-        possible_diags = []
-        DIAGONAL_DIRS.each do |dir, dif|
+    def get_moves(dir_hash)
+        possibles = []
+        dir_hash.each do |dir, dif|
             current_pos = self.position
             new_pos = [current_pos[0] + dif[0], current_pos[1] + dif[1]]
             while self.board.empty_position(new_pos)
-                possible_diags << new_pos
+                possibles << new_pos
                 new_pos = [new_pos[0] + dif[0], new_pos[1] + dif[1]]
             end
+            if Board.valid_position?(new_pos)
+                possibles << new_pos unless self.board[new_pos].color == self.color
+            end
         end
-        return possible_diags
+        return possibles
     end
 
-    def horizontal_moves
-
-    end
 end

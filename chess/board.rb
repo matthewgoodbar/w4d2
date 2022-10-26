@@ -1,4 +1,5 @@
-require_relative "required"
+require "byebug"
+require_relative "required_pieces"
 
 class Board
 
@@ -103,7 +104,12 @@ class Board
 end
 
 # debugger
-# b = Board.get_empty_board
-# bish = Bishop.new(b, [5,5], :b)
-# b[[5,5]] = bish
-# p bish.moves
+b = Board.get_empty_board
+bish = Bishop.new(b, [5,5], :b)
+b[[5,5]] = bish
+bish2 = Bishop.new(b, [1,1], :w)
+b[[1,1]] = bish2
+pawn = Pawn.new(b, [7,7], :b)
+b[[7,7]] = pawn
+
+p bish.moves
