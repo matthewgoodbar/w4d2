@@ -9,4 +9,13 @@ class Pawn < Piece
     def to_s
         return "Pn"
     end
+
+    def moves
+
+    end
+
+    private
+    def at_start_row?
+        self.color == :w && self.position[0] == 1 || self.color == :b && self.position[0] == 6
+    end
 end
