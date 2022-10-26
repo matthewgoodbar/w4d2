@@ -25,29 +25,28 @@ class Pawn < Piece
 
     def forward_dir
         if self.color == :w
-            return [-1,0]
-        else
             return [1,0]
+        else
+            return [-1,0]
         end
     end
 
     def forward_steps
-        steps = []
+        return forward_steps_at_start if at_start_row?
+        res = []
         first_step = [self.position[0] + forward_dir[0], self.position[1]]
-        double_step = [self.position[0] + (forward_dir[0]*2), self.position[1]]
+        res << first_step if self.board.empty_position?(first_step)
+        return res
+    end
 
-        if at_start_row?
-            if self.board.empty_position?(first_step) && self.board.empty_position?(double_step)
-                steps << first_step
-                steps << double_step
-            elsif self.board.empty_position?(first_step)
-                steps << first_step
-            end
-        else 
-            if self.board.empty_position?(first_step)
-                steps << first_step
-            end
+    def forward_steps_at_start
+        res = []
+        first_step = [self.position[0] + forward_dir[0], self.position[1]]
+        second_step = [self.position[0] + (forward_dir[0] * 2), self.position[1]]
+        if self.board.empty_position?(first_step)
+            res << first_step
+            res << second_step if self.board.empty_position?(second_step)
         end
-        steps
+        return res
     end
 end
