@@ -9,7 +9,7 @@ class King < Piece
     end
 
     def to_s
-        return "Ki"
+        return self.color_piece("Ki")
     end
 
     private

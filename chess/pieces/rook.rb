@@ -9,7 +9,7 @@ class Rook < Piece
     end
 
     def to_s
-        return "Rk"
+        return self.color_piece("Rk")
     end
 
     private

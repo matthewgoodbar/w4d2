@@ -9,7 +9,7 @@ class Bishop < Piece
     end
 
     def to_s
-        return "Bi"
+        return self.color_piece("Bi")
     end
 
     private

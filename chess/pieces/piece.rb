@@ -14,4 +14,14 @@ class Piece
     def to_s
         return "no"
     end
+
+    def color_piece(str)
+        if self.color == :w
+            return str.colorize(:black).colorize(:background => :white)
+        elsif self.color == :b
+            return str.colorize(:white).colorize(:background => :black)
+        else
+            return str
+        end
+    end
 end

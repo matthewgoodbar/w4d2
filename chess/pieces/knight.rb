@@ -9,7 +9,7 @@ class Knight < Piece
     end
 
     def to_s
-        return "Kn"
+        return self.color_piece("Kn")
     end
 
     private

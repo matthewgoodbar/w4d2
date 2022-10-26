@@ -9,7 +9,7 @@ class Queen < Piece
     end
 
     def to_s
-        return "Qn"
+        return self.color_piece("Qn")
     end
     private
     def diag?
