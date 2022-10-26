@@ -1,7 +1,8 @@
 require 'colorize'
 
 class Piece
-    attr_reader :position, :board, :color
+    attr_reader :board, :color
+    attr_accessor :position
     
     def initialize(board, position, color)
         @board = board
