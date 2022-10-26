@@ -2,7 +2,7 @@ require_relative "board"
 require_relative "cursor"
 
 class Display
-    attr_reader :board
+    attr_reader :board, :cursor
 
     def initialize(board)
         @board = board
@@ -15,7 +15,11 @@ class Display
         (0...8).each do |row|
             print "#{row} "
             (0...8).each do |col|
-                print "#{self.board[[row,col]].to_s}"
+                if [row,col] == @cursor.cursor_pos
+                    print "#{self.board[[row,col]].to_s}".colorize(:background => :yellow)
+                else
+                    print "#{self.board[[row,col]].to_s}"
+                end
             end
             puts
         end
@@ -26,3 +30,4 @@ end
 b = Board.new
 disp = Display.new(b)
 disp.render
+disp.cursor.get_input
