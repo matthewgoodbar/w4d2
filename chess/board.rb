@@ -69,7 +69,7 @@ class Board
         self[[7,3]] = King.new(self, [7,3], :b)
     end
 
-    def empty_position(pos)
+    def empty_position?(pos)
         return Board.valid_position?(pos) && self[pos] == NullPiece.instance
     end
 

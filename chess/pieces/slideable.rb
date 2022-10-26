@@ -14,7 +14,7 @@ module Slideable
         dir_hash.each do |dir, dif|
             current_pos = self.position
             new_pos = [current_pos[0] + dif[0], current_pos[1] + dif[1]]
-            while self.board.empty_position(new_pos)
+            while self.board.empty_position?(new_pos)
                 possibles << new_pos
                 new_pos = [new_pos[0] + dif[0], new_pos[1] + dif[1]]
             end

@@ -10,8 +10,12 @@ class Pawn < Piece
         return self.color_piece("Pn")
     end
 
-    def moves
+    def test
+        self.at_start_row?
+    end
 
+    def moves
+        forward_steps
     end
 
     private
@@ -25,5 +29,25 @@ class Pawn < Piece
         else
             return [1,0]
         end
+    end
+
+    def forward_steps
+        steps = []
+        first_step = [self.position[0] + forward_dir[0], self.position[1]]
+        double_step = [self.position[0] + (forward_dir[0]*2), self.position[1]]
+
+        if at_start_row?
+            if self.board.empty_position?(first_step) && self.board.empty_position?(double_step)
+                steps << first_step
+                steps << double_step
+            elsif self.board.empty_position?(first_step)
+                steps << first_step
+            end
+        else 
+            if self.board.empty_position?(first_step)
+                steps << first_step
+            end
+        end
+        steps
     end
 end
