@@ -1,4 +1,5 @@
 require_relative "piece"
+require_relative "slideable"
 
 class Queen < Piece
     include Slideable
@@ -6,7 +7,7 @@ class Queen < Piece
     def initialize(board, position, color)
         super
     end
-    
+
     def to_s
         return "Qn"
     end

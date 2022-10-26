@@ -1,6 +1,3 @@
-require_relative "slideable"
-require_relative "stepable"
-
 class Piece
     def initialize(board, position, color)
         @board = board
