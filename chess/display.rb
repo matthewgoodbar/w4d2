@@ -25,9 +25,19 @@ class Display
         end
         nil
     end
+
+    def test_play
+        user_input = nil
+        until user_input == 0
+            system("clear") || system("cls")
+            render
+            puts self.cursor.cursor_pos
+            user_input = self.cursor.get_input
+        end
+    end
+
 end
 
 b = Board.new
 disp = Display.new(b)
-disp.render
-disp.cursor.get_input
+disp.test_play

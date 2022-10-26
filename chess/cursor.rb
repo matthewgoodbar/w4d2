@@ -80,12 +80,22 @@ class Cursor
     case key
     when :up
       update_pos(MOVES[key])
+      return nil
     when :down
       update_pos(MOVES[key])
+      return nil
     when :left
       update_pos(MOVES[key])
+      return nil
     when :right
       update_pos(MOVES[key])
+      return nil
+    when :space
+      return self.cursor_pos
+    when :return
+      return self.cursor_pos
+    when :ctrl_c
+      return 0
     else
     end
   end
