@@ -15,6 +15,16 @@ class Piece
         return "no"
     end
 
+    def opposite_color
+        if self.color == :w
+            return :b
+        elsif self.color == :b
+            return :w
+        else
+            return self.color
+        end
+    end
+
     def color_piece(str)
         if self.color == :w
             return str.colorize(:black).colorize(:background => :white)
