@@ -3,7 +3,7 @@ require_relative "slideable"
 
 class Bishop < Piece
     include Slideable
-    attr_reader :position, :board, :color
+    
     def initialize(board, position, color)
         super
     end

@@ -1,6 +1,8 @@
 require 'colorize'
 
 class Piece
+    attr_reader :position, :board, :color
+    
     def initialize(board, position, color)
         @board = board
         @position = position
@@ -21,7 +23,7 @@ class Piece
         elsif self.color == :b
             return :w
         else
-            return self.color
+            return nil
         end
     end
 

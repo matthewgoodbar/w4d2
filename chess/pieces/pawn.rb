@@ -1,7 +1,7 @@
 require_relative "piece"
 
 class Pawn < Piece
-    attr_reader :position, :board, :color
+    
     def initialize(board, position, color)
         super
     end
@@ -54,8 +54,12 @@ class Pawn < Piece
         res = []
         left_attack = [self.position[0] + forward_dir, self.position[1] - 1]
         right_attack = [self.position[0] + forward_dir, self.position[1] + 1]
-        res << left_attack unless self.board.empty_position?(left_attack) || self.board[left_attack].color == self.color
-        res << right_attack unless self.board.empty_position?(right_attack) || self.board[right_attack].color == self.color
+        attacks = [left_attack, right_attack]
+        attacks.each do |attack|
+            if Board.valid_position?(attack) && self.board[attack].color == self.opposite_color
+                res << attack
+            end
+        end
         return res
     end
 end

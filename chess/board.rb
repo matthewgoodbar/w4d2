@@ -88,8 +88,9 @@ class Board
         piece = self[start_pos]
         moves = piece.moves
         raise 'Can\'t move there' unless Board.valid_position?(end_pos) && moves.include?(end_pos)
-        self[start_pos] = Nullpiece.instance
+        self[start_pos] = NullPiece.instance
         self[end_pos] = piece
+        piece.position = end_pos
     end
 
 end
