@@ -89,21 +89,4 @@ class Board
 
     end
 
-    def render
-        print "   0 1 2 3 4 5 6 7"
-        puts
-        (0...8).each do |row|
-            print "#{row} "
-            (0...8).each do |col|
-                print "#{self[[row,col]].to_s}"
-            end
-            puts
-        end
-        nil
-    end
 end
-
-# debugger
-b = Board.new
-pawn = b[[6,2]]
-p pawn.moves
