@@ -114,6 +114,28 @@ class Board
     end
 
     def in_check?(color)
+        king_pos = get_king_pos(color)
+        opponent_moves = get_all_moves_of_color(opposite_color(color))
+        return opponent_moves.include?(king_pos)
+    end
 
+    def get_all_moves_of_color(color)
+        res = []
+        if color == :w
+            self.white_pieces.each {|piece| res += piece.moves}
+        elsif color == :b
+            self.black_pieces.each {|piece| res += piece.moves}
+        end
+        return res
+    end
+
+    def opposite_color(color)
+        if color == :w
+            return :b
+        elsif color == :b
+            return :w
+        else
+            return nil
+        end
     end
 end
