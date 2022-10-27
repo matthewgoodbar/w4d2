@@ -4,6 +4,7 @@ require_relative "required_pieces"
 class Board
 
     attr_accessor :board
+    attr_reader :white_pieces, :black_pieces
     
     def self.valid_position?(pos)
         pos.all? {|num| num < 8 && num >= 0}
@@ -16,6 +17,8 @@ class Board
 
     def initialize(empty=false)
         @board = Array.new(8) {Array.new(8) {NullPiece.instance}}
+        @black_pieces = []
+        @white_pieces = []
         populate unless empty
     end
 
@@ -30,43 +33,44 @@ class Board
 
     def populate_pawns
         (0..7).each do |col|
-            self[[1,col]] = Pawn.new(self, [1,col], :w)
+            @white_pieces << self[[1,col]] = Pawn.new(self, [1,col], :w)
         end
 
         (0..7).each do |col|
-            self[[6,col]] = Pawn.new(self, [6,col], :b)
+            @black_pieces << self[[6,col]] = Pawn.new(self, [6,col], :b)
         end
     end
 
     def populate_rooks
-        self[[0,0]] = Rook.new(self, [0,0], :w)
-        self[[0,7]] = Rook.new(self, [0,7], :w)
-        self[[7,0]] = Rook.new(self, [7,0], :b)
-        self[[7,7]] = Rook.new(self, [7,7], :b)
+
+        @white_pieces << self[[0,0]] = Rook.new(self, [0,0], :w)
+        @white_pieces << self[[0,7]] = Rook.new(self, [0,7], :w)
+        @black_pieces << self[[7,0]] = Rook.new(self, [7,0], :b)
+        @black_pieces << self[[7,7]] = Rook.new(self, [7,7], :b)
     end
 
     def populate_knights
-        self[[0,1]] = Knight.new(self, [0,1], :w)
-        self[[0,6]] = Knight.new(self, [0,6], :w)
-        self[[7,1]] = Knight.new(self, [7,1], :b)
-        self[[7,6]] = Knight.new(self, [7,6], :b)
+        @white_pieces << self[[0,1]] = Knight.new(self, [0,1], :w)
+        @white_pieces << self[[0,6]] = Knight.new(self, [0,6], :w)
+        @black_pieces << self[[7,1]] = Knight.new(self, [7,1], :b)
+        @black_pieces << self[[7,6]] = Knight.new(self, [7,6], :b)
     end
 
     def populate_bishops
-        self[[0,2]] = Bishop.new(self, [0,2], :w)
-        self[[0,5]] = Bishop.new(self, [0,5], :w)
-        self[[7,2]] = Bishop.new(self, [7,2], :b)
-        self[[7,5]] = Bishop.new(self, [7,5], :b)
+        @white_pieces << self[[0,2]] = Bishop.new(self, [0,2], :w)
+        @white_pieces << self[[0,5]] = Bishop.new(self, [0,5], :w)
+        @black_pieces << self[[7,2]] = Bishop.new(self, [7,2], :b)
+        @black_pieces << self[[7,5]] = Bishop.new(self, [7,5], :b)
     end
 
     def populate_queens
-        self[[0,4]] = Queen.new(self, [0,4], :w)
-        self[[7,4]] = Queen.new(self, [7,4], :b)
+        @white_pieces << self[[0,4]] = Queen.new(self, [0,4], :w)
+        @black_pieces << self[[7,4]] = Queen.new(self, [7,4], :b)
     end
 
     def populate_kings
-        self[[0,3]] = King.new(self, [0,3], :w)
-        self[[7,3]] = King.new(self, [7,3], :b)
+        @white_pieces << self[[0,3]] = King.new(self, [0,3], :w)
+        @black_pieces << self[[7,3]] = King.new(self, [7,3], :b)
     end
 
     def empty_position?(pos)
@@ -88,13 +92,28 @@ class Board
         piece = self[start_pos]
         moves = piece.moves
         raise 'Can\'t move there' unless Board.valid_position?(end_pos) && moves.include?(end_pos)
+        
+        @white_pieces.delete(self[end_pos])
+        @black_pieces.delete(self[end_pos])
+        
         self[start_pos] = NullPiece.instance
         self[end_pos] = piece
         piece.position = end_pos
+    end
+
+    def get_king_pos(color)
+        if color == :w
+            self.white_pieces.each {|piece| return piece.position if piece.kind_of?(King)}
+        elsif color == :b
+            self.black_pieces.each {|piece| return piece.position if piece.kind_of?(King)}
+        end
     end
 
     def checkmate?
         return false
     end
 
+    def in_check?(color)
+
+    end
 end

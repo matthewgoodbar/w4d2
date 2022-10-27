@@ -52,5 +52,5 @@ class Chess
 
 end
 
-# debugger
+debugger
 Chess.new.play
