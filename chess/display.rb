@@ -41,7 +41,3 @@ class Display
     # end
 
 end
-
-b = Board.new
-disp = Display.new(b)
-disp.test_play

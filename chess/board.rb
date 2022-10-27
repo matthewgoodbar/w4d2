@@ -93,4 +93,8 @@ class Board
         piece.position = end_pos
     end
 
+    def checkmate?
+        return false
+    end
+
 end

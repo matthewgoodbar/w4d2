@@ -2,6 +2,7 @@ require_relative 'board'
 require_relative 'display'
 require_relative 'player'
 require_relative 'cursor'
+require 'byebug'
 
 class Chess
     attr_reader :board, :cursor, :display, :player1, :player2
@@ -16,24 +17,17 @@ class Chess
     end
 
     def switch_player
-        if current_player == player1
-            current_player = player2
-        else current_player = player1
+        if self.current_player == self.player1
+            self.current_player = self.player2
+        else 
+            self.current_player = self.player1
         end
     end
     
     def play
-        res = []
-        while true
-            system("clear") || system("cls")
-            render(self.current_player)
-            user_input = self.player.get_input
-            res << user_input unless user_input.nil?
-            if res.length == 2
-                self.board.move_piece(res[0], res[1])
-                res = []
-                switch_player
-            end
+        until self.board.checkmate?
+            player_move
+            switch_player
         end
     end
 
@@ -41,13 +35,22 @@ class Chess
         begin
             move = []
             while move.length < 2
-                user_input = self.player.get_input
+                system("clear") || system("cls")
+                self.display.render(self.current_player)
+                user_input = self.current_player.get_input
                 move << user_input unless user_input.nil?
             end
-            
+            raise 'That\'s not your piece!' unless self.board[move[0]].color == self.current_player.color
+            self.board.move_piece(move[0], move[1])
+            return
         rescue
-
+            puts "That was not a valid move, please try again."
+            gets
+            retry
         end
     end
 
 end
+
+# debugger
+Chess.new.play
